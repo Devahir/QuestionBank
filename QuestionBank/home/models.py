@@ -10,7 +10,7 @@ class Question(models.Model):
     disciption=models.CharField(max_length=50)
     medium=models.CharField(max_length=3)
     topic_Key=models.CharField(max_length=40)
-    QuestionText=models.CharField()
+    QuestionText=models.CharField(max_length=1000)
 
 class Student(models.Model):
     first_name=models.CharField(max_length=30)
