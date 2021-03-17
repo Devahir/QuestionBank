@@ -2,25 +2,48 @@ import csv
 
 import random
 import os
+import io
 from django.shortcuts import render,HttpResponse
 from django.http import JsonResponse
 
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
+
 from home.models import Question
 from home.serielizerM import Qestionserializer
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def giveRandomQ(request):
 
-    random_num=random.randint(1,24)
+    if request.method=="GET":
 
-    question=Question.objects.get(id=random_num)
-    seride=Qestionserializer(question)
-    return JsonResponse(seride.data)
+        random_num=random.randint(1,24)
+
+        question=Question.objects.filter(Class="7")
+        seride=Qestionserializer(question,many=True)
+        return JsonResponse({'data':seride.data})
+
+    if request.method=="POST":
+        json_data=request.body
+        stream=io.BytesIO(json_data)
+        pythondata=JSONParser().parse(stream)
+        serializer=Qestionserializer(data=pythondata)
+        if serializer.is_valid():
+            serializer.save()
+            res={"msg":"Data Created"}
+            json_data=JSONRenderer().render(res)
+            return HttpResponse(json_data,content_type="application/json")
+        json_data=JSONRenderer().render(serializer.errors)
+        return HttpResponse(json_data,content_type="application/json")
 
 
 
 
 
 
+
+# question=Question.objects.filter(Class="7")
 # with open('Untitled form.csv') as csvfile:
 #     csvReader=csv.DictReader(csvfile)
 # Create your views here.
