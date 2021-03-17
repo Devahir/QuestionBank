@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Student,Question
+from .models import Student,Question,GKQuestion
 
 # Register your models here.
 
@@ -13,3 +13,8 @@ class qq(admin.ModelAdmin):
     list_display=["chapter_name","topic_Key"]
 
 admin.site.register(Question,qq)
+
+class gk(admin.ModelAdmin):
+    list_display=["answer","topic"]
+
+admin.site.register(GKQuestion,gk)

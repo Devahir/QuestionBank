@@ -17,12 +17,14 @@ from django.views.decorators.csrf import csrf_exempt
 def giveRandomQ(request):
 
     if request.method=="GET":
-
+        res={"msg":"Not"}
         random_num=random.randint(1,24)
-
-        question=Question.objects.filter(Class="7")
-        seride=Qestionserializer(question,many=True)
-        return JsonResponse({'data':seride.data})
+        for x in range(1,30):
+            question=Question.objects.get(id=x)
+            # question.delete()
+            res={"msg":"ataeCDa rted"}
+        json_data=JSONRenderer().render(res)
+        return JsonResponse({'data':json_data})
 
     if request.method=="POST":
         json_data=request.body

@@ -20,3 +20,13 @@ class Student(models.Model):
     course=models.CharField(max_length=4)
     coin=models.CharField(max_length=4)
     weight=models.CharField(max_length=4)
+
+class GKQuestion(models.Model):
+    optionA=models.CharField(max_length=50)
+    optionB=models.CharField(max_length=50)
+    optionC=models.CharField(max_length=50)
+    optionD=models.CharField(max_length=50)
+    disciption=models.CharField(max_length=1000)
+    answer=models.CharField(max_length=1)
+    topic=models.CharField(max_length=40)
+    QuestionText=models.CharField(max_length=1000)

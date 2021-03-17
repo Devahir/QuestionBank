@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Question
+from .models import Question,GKQuestion
 
 class Studentserializer(serializers.Serializer):
     first_name=serializers.CharField(max_length=30)
@@ -22,3 +22,17 @@ class Qestionserializer(serializers.Serializer):
     
     def create(self, validated_data):
         return Question.objects.create(**validated_data)
+
+
+class GKQuestionserilizer(serializers.Serializer):
+    optionA=serializers.CharField(max_length=3)
+    optionB=serializers.CharField(max_length=4)
+    optionC=serializers.CharField(max_length=40)
+    optionD=serializers.CharField(max_length=4)
+    disciption=serializers.CharField(max_length=1000)
+    answer=serializers.CharField(max_length=1)
+    topic=serializers.CharField(max_length=40)
+    QuestionText=serializers.CharField(max_length=1000)
+
+    def create(self, validated_data):
+        return GKQuestion.objects.create(**validated_data)
