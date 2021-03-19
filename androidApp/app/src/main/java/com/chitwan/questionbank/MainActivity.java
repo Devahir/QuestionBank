@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mQueue= Volley.newRequestQueue(this);
 
         textView=findViewById(R.id.textview);
-        option=findViewById(R.id.listOption);
+   //     option=findViewById(R.id.listOption);
 
         String work="0000@Name the bill that was passed in the Parliament that seeks to clarify that allottees under a real estate project should be treated as financial creditors.@insolvency and Bankruptcy Code (Second Amendment) Bill, 2018@Recovery of Non-Performing Assets Bill, 2017@Insolvency and Bankruptcy Code (First Amendment) Bill, 2017@Recovery of Non-Performing Assets (Amendment) Bill, 2018";
         String[] mcq=work.split("@");
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         ArrayAdapter adapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1,list);
-        option.setAdapter(adapter);
+    //    option.setAdapter(adapter);
 
         textView.setText(mcq[1]);
 
@@ -82,5 +83,8 @@ public class MainActivity extends AppCompatActivity {
 //                });
 //        mQueue.add(jsonRequestoe);
 
+    }
+
+    public void doSubmit(View view) {
     }
 }
