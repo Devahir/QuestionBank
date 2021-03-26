@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     String work;
     String[] mcq;
-    ListView option;
+    int[] option={0,0,0,0};
+
+    AnimationDrawable drawable;
 
     Button button;
 
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         line3=findViewById(R.id.line3);
         line4=findViewById(R.id.line4);
 
+
+
         button=findViewById(R.id.submit_area);
         Explain=findViewById(R.id.textView2);
 
@@ -101,33 +107,53 @@ public class MainActivity extends AppCompatActivity {
         opA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                line2.setVisibility(View.GONE);
-                line3.setVisibility(View.GONE);
-                line4.setVisibility(View.GONE);
+                if(option[0]==0){
+                    line1.setBackgroundResource(R.drawable.backgreen);
+                    option[0]=1;
+                    checkAnswer(0);
+                }else{
+                    line1.setBackgroundResource(R.drawable.custum_option);
+                    option[0]=0;
+                }
             }
         });
         opB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                line1.setVisibility(View.GONE);
-                line3.setVisibility(View.GONE);
-                line4.setVisibility(View.GONE);
+                if(option[1]==0){
+                    line2.setBackgroundResource(R.drawable.backgreen);
+                    option[1]=1;
+                    checkAnswer(1);
+                }else{
+                    line2.setBackgroundResource(R.drawable.custum_option);
+                    option[1]=0;
+                }
             }
         });
         opC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                line2.setVisibility(View.GONE);
-                line1.setVisibility(View.GONE);
-                line4.setVisibility(View.GONE);
+                if(option[2]==0){
+                    line3.setBackgroundResource(R.drawable.backgreen);
+                    option[2]=1;
+                    checkAnswer(2);
+                }else{
+                    line3.setBackgroundResource(R.drawable.custum_option);
+                    option[2]=0;
+                }
             }
         });
         opD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                line2.setVisibility(View.GONE);
-                line3.setVisibility(View.GONE);
-                line1.setVisibility(View.GONE);
+                if(option[3]==0){
+                    line4.setBackgroundResource(R.drawable.backgreen);
+                    option[3]=1;
+                    checkAnswer(3);
+                }else{
+                    line4.setBackgroundResource(R.drawable.custum_option);
+                    option[3]=0;
+                }
             }
         });
 
@@ -164,6 +190,31 @@ public class MainActivity extends AppCompatActivity {
 //                });
 //        mQueue.add(jsonRequestoe);
 
+    }
+
+    private void checkAnswer(int x) {
+        for(int i=0;i<4;i++){
+            if(i!=x) {
+                switch (i){
+                    case 0:
+                        line1.setBackgroundResource(R.drawable.custum_option);
+                        option[0]=0;
+                        break;
+                    case 1:
+                        line2.setBackgroundResource(R.drawable.custum_option);
+                        option[1]=0;
+                        break;
+                    case 2:
+                        line3.setBackgroundResource(R.drawable.custum_option);
+                        option[2]=0;
+                        break;
+                    case 3:
+                        line4.setBackgroundResource(R.drawable.custum_option);
+                        option[3]=0;
+                        break;
+                }
+            }
+        }
     }
 
     public void doSubmit(View view) {
