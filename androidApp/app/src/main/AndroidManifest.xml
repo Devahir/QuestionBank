@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuestionBank">
-        <activity android:name=".quizeLayout.Quize"></activity>
+        <activity android:name=".getQuestion.serverQuestion"></activity>
+        <activity android:name=".quizeLayout.Quize" />
+        <activity android:name=".Application.Coustumapp"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,5 +22,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>

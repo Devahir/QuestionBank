@@ -3,6 +3,7 @@ package com.chitwan.questionbank.quizeLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,10 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.chitwan.questionbank.Application.Coustumapp;
 import com.chitwan.questionbank.R;
+import com.chitwan.questionbank.getQuestion.QuestionServer;
+import com.moengage.core.MoEngage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,31 +25,21 @@ import java.util.List;
 public class Quize extends AppCompatActivity {
     RequestQueue mQueue;
     TextView textView;
+    boolean checked=false;
     String work;
     String[] mcq;
     int[] option={0,0,0,0};
 
     AnswerBord answerBord;
-
     Button button;
 
     String Answer,Explainaton;
-
     ConstraintLayout ll;
 
     LinearLayout line1,line2,line3, line4;
-
     TextView opA,opB,opC,opD;
-
     TextView Explain;
 
-    @Override
-    public void onBackPressed() {
-        line1.setVisibility(View.VISIBLE);
-        line2.setVisibility(View.VISIBLE);
-        line3.setVisibility(View.VISIBLE);
-        line4.setVisibility(View.VISIBLE);
-    }
 
 
     @Override
@@ -53,7 +47,7 @@ public class Quize extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quize);
 
-        mQueue= Volley.newRequestQueue(this);
+      //  mQueue= Volley.newRequestQueue(this);
 
         opA=findViewById(R.id.opA);
         opB=findViewById(R.id.opB);
@@ -65,16 +59,15 @@ public class Quize extends AppCompatActivity {
         line3=findViewById(R.id.line3);
         line4=findViewById(R.id.line4);
 
-
-
         button=findViewById(R.id.submit_area);
         Explain=findViewById(R.id.textView2);
 
 
         textView=findViewById(R.id.textview);
         //     option=findViewById(R.id.listOption);
-
-        work="0000@Name the bill that was passed in the Parliament that seeks to clarify that allottees under a real estate project should be treated as financial creditors.@insolvency and Bankruptcy Code (Second Amendment) Bill, 2018@Recovery of Non-Performing Assets Bill, 2017@Insolvency and Bankruptcy Code (First Amendment) Bill, 2017@Recovery of Non-Performing Assets (Amendment) Bill, 2018";
+        QuestionServer questionServer=new QuestionServer(this);
+        questionServer.SetTExt(textView);
+        work=questionServer.getQuestion();
         mcq=work.split("@");
         Explainaton="this is the Explainaton and done";
 
@@ -184,7 +177,6 @@ public class Quize extends AppCompatActivity {
 //        mQueue.add(jsonRequestoe);
 
     }
-
     private void checkAnswer(int x) {
         for(int i=0;i<4;i++){
             if(i!=x) {
@@ -217,6 +209,8 @@ public class Quize extends AppCompatActivity {
         }else Explain.setText("Wrong: "+Explainaton);
 
         button.setVisibility(View.GONE);
+        Intent work=new Intent(Quize.this, Coustumapp.class);
+        startActivity(work) ;
 
     }
 }
