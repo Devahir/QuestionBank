@@ -23,5 +23,7 @@ public class MainActivity extends AppCompatActivity{
     public void makeLayout(View view) {
         Intent openQ=new Intent(MainActivity.this, Quize.class);
         startActivity(openQ);
+
+        // comment added
     }
 }
